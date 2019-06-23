@@ -38,7 +38,7 @@ public class Leet160_InsectionOfTwoLists {
         return null;
     }
 
-    public static class ListNode {
+    private static class ListNode {
         int val;
         ListNode next;
 

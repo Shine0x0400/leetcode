@@ -37,7 +37,7 @@ public class Leet141_LinkedListCircle {
     }
 
 
-    public static class ListNode {
+    private static class ListNode {
         int val;
         ListNode next;
 
