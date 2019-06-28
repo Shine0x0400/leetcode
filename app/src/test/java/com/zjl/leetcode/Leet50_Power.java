@@ -1,0 +1,103 @@
+package com.zjl.leetcode;
+
+/**
+ * @author zjl
+ * @date 2019-06-28
+ */
+public class Leet50_Power {
+
+//    // using Recursion
+//    public double myPow(double x, int n) {
+//        if (n == 0) {
+//            return 1;
+//        }
+//
+//        double r = 1;
+//        if (n < 0) {
+//
+//            if ((n & 1) == 1) {
+//                r = 1 / x;
+//            }
+//
+//            n = -(n / 2);
+//            x = (1 / x) * (1 / x);
+//
+//        }
+//
+//        return n % 2 == 0 ? r * myPow(x * x, n / 2) : r * x * myPow(x * x, n / 2);
+//    }
+
+    // NOT using Recursion
+    // https://zh.wikipedia.org/wiki/%E5%86%AA
+    public double myPow(double x, int n) {
+
+        double y = 1;
+        double f = x;
+        int k = n;
+
+        if (n < 0) {
+            if ((n & 1) == 1) {
+                y = 1 / x;
+            }
+
+            k = -(n / 2);
+            f = (1 / x) * (1 / x);
+        }
+
+        while (k > 0) {
+            if (k % 2 == 1) {
+                y *= f;
+            }
+
+            k >>= 1;
+            f *= f;
+        }
+
+        return y;
+    }
+
+
+//    /**
+//     * x^n
+//     * Time Limit Exceeded:
+//     * 0.00001
+//     * 2147483647
+//     */
+//    public double myPow(double x, int n) {
+//        // not support in math
+//        if (x == 0 && n < 0) {
+//            return -1;
+//        }
+//
+//        if (n == 0) {
+//            return 1;
+//        }
+//
+//        if (x == 0) {
+//            return 0;
+//        }
+//
+//        if (x == 1) {
+//            return 1;
+//        }
+//
+//        if (x == -1) {
+//            // 奇数
+//            if ((n & 1) == 1) {
+//                return -1;
+//            } else {
+//                return 1;
+//            }
+//        }
+//
+//        boolean positive = n > 0;
+//        long nabs = Math.abs(((long) n));
+//
+//        double r = 1;
+//        for (int i = 0; i < nabs; i++) {
+//            r *= x;
+//        }
+//
+//        return positive ? r : 1 / r;
+//    }
+}
