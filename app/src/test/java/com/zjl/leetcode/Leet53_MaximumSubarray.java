@@ -20,22 +20,16 @@ public class Leet53_MaximumSubarray {
         return max;
     }
 
-    // DP: throws Memory Limit Exceeded
+//    // DP
 //    public int maxSubArray(int[] nums) {
-//        int[][] memo = new int[nums.length][nums.length];
 //        int max = nums[0];
 //
 //        for (int i = 0; i < nums.length; i++) {
-//            for (int j = i; j < nums.length; j++) {
-//                if (j == i) {
-//                    memo[i][j] = nums[i];
-//                } else {
-//                    memo[i][j] = memo[i][j - 1] + nums[j];
-//                }
-//
-//                if (memo[i][j] > max) {
-//                    max = memo[i][j];
-//                }
+//            int sumi = nums[i];
+//            max = Math.max(max, sumi);
+//            for (int j = i + 1; j < nums.length; j++) {
+//                sumi += nums[j];
+//                max = Math.max(max, sumi);
 //            }
 //        }
 //

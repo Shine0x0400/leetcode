@@ -97,12 +97,14 @@ public class Leet10_RegExpMatch {
 
         for (int i = s.length(); i >= 0; i--) {
             for (int j = p.length() - 1; j >= 0; j--) {
-                boolean firstMatch = i != s.length()
-                        && (p.charAt(j) == s.charAt(i) || p.charAt(j) == '.');
+
+                boolean firstMatch = i < s.length()
+                        && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.');
 
                 if (j < p.length() - 1 && p.charAt(j + 1) == '*') {
-                    dp[i][j] = dp[i][j + 2] || (firstMatch && dp[i + 1][j]);
-                } else {
+                    dp[i][j] = dp[i][j + 2] // * means zero repetition
+                            || (firstMatch && dp[i + 1][j]); // * means once or more repetition
+                } else { // p.charAt(j) can not be ignored
                     dp[i][j] = firstMatch && dp[i + 1][j + 1];
                 }
             }

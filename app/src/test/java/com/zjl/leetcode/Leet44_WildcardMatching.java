@@ -45,43 +45,34 @@ public class Leet44_WildcardMatching {
         return true;
     }
 
-
-//    /**
-//     * Time Limit Exceeded:
-//     * "abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb"
-//     * "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"
-//     */
+//    // 动态规划
 //    public boolean isMatch(String s, String p) {
+//        // 动态规划, dp[i][j]表示isMatch(s.subString(i), p.subString(j))
+//        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+//        dp[s.length()][p.length()] = true;
 //
-//        boolean firstMatch = s.length() == 0
-//                ? (p.length() == 0 || p.charAt(0) == '*')
-//                : p.length() != 0 && (p.charAt(0) == '?' || p.charAt(0) == '*' || p.charAt(0) == s.charAt(0));
+//        for (int i = s.length(); i >= 0; i--) {
+//            for (int j = p.length(); j >= 0; j--) {
+//                if (j == p.length()) {
+//                    if (i != s.length()) {
+//                        dp[i][j] = false;
+//                    }
+//                    continue;
+//                }
 //
-//        if (p.length() == 0) {
-//            return s.length() == 0;
-//        } else if (p.charAt(0) != '*') {
-//            return s.length() != 0 && (p.charAt(0) == '?' || p.charAt(0) == s.charAt(0)) && isMatch(s.substring(1), p.substring(1));
-//        } else {// p.charAt(0) == '*'
-//            /**
-//             * "adceb"
-//             * "*a*b"
-//             */
-//            int firstNonStar = 1;
-//            for (; firstNonStar < p.length(); firstNonStar++) {
-//                if (p.charAt(firstNonStar) != '*') {
-//                    break;
+//                char c = p.charAt(j);
+//                if (c == '?') {
+//                    dp[i][j] = (i <= s.length() - 1) && dp[i + 1][j + 1];
+//                } else if (c == '*') {
+//                    dp[i][j] = dp[i][j + 1] // matches empty
+//                            || (i <= s.length() - 1) && dp[i + 1][j]; // matches character
+//                } else {
+//                    dp[i][j] = (i <= s.length() - 1) && s.charAt(i) == c && dp[i + 1][j + 1];
 //                }
 //            }
-//
-//            // this '*' can match [0, s.length()] characters.
-//            for (int i = 0; i <= s.length(); i++) {
-//                if (isMatch(s.substring(i), p.substring(firstNonStar))) {
-//                    return true;
-//                }
-//            }
-//
-//            return false;
 //        }
+//
+//        return dp[0][0];
 //
 //    }
 }

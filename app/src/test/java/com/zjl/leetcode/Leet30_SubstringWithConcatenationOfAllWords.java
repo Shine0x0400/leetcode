@@ -74,4 +74,48 @@ public class Leet30_SubstringWithConcatenationOfAllWords {
 
         return ans;
     }
+
+    // 重操旧业
+//    public List<Integer> findSubstring(String s, String[] words) {
+//        List<Integer> result = new ArrayList<>();
+//        int len = words[0].length();
+//
+//        for (int b = 0; b < len; b++) {
+//            List<String> list = new ArrayList<>(Arrays.asList(words));
+//
+//            int i = b, j = b;
+//
+//            while (!list.isEmpty() && j + len <= s.length()) {
+//                String substring = s.substring(j, j + len);
+//                if (list.contains(substring)) {
+//                    list.remove(substring);
+//                    j += len;
+//
+//                    if (list.isEmpty()) {
+//                        result.add(i);
+//
+//                        if (j + len <= s.length()) {
+//                            list.add(s.substring(i, i + len));
+//                            i += len;
+//                        }
+//                    }
+//
+//                } else {
+//                    if (i < j) {
+//                        list.add(s.substring(i, i + len));
+//                    }
+//                    i += len;
+//
+//                    if (j < i) {
+//                        j = i;
+//                    }
+//                }
+//            }
+//
+//
+//
+//        }
+//
+//        return result;
+//    }
 }

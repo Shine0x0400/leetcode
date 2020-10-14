@@ -11,45 +11,37 @@ import java.util.List;
 public class Leet15_3Sum {
 
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (nums.length < 3) {
-            return result;
-        }
-
         Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
 
-        for (int i = 0; i < nums.length - 2; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
 
             int remain = 0 - nums[i];
 
-            // two pointers
-            int lo = i + 1, hi = nums.length - 1;
-            while (lo < hi) {
-                int sum2 = nums[lo] + nums[hi];
-                if (sum2 == remain) {
-                    result.add(Arrays.asList(nums[i], nums[lo], nums[hi]));
-                    hi--;
-                    while (lo < hi && nums[hi] == nums[hi + 1]) {
-                        hi--;
-                    }
+            for (int l = i + 1, r = nums.length - 1; l < r; ) {
+                int sum = nums[l] + nums[r];
 
-                    lo++;
-                    while (lo < hi && nums[lo] == nums[lo - 1]) {
-                        lo++;
-                    }
-                } else if (sum2 > remain) {
-                    hi--;
-                    while (lo < hi && nums[hi] == nums[hi + 1]) {
-                        hi--;
-                    }
+                if (sum == remain) {
+                    List<Integer> triplet = new ArrayList<>();
+                    triplet.add(nums[i]);
+                    triplet.add(nums[l]);
+                    triplet.add(nums[r]);
+                    result.add(triplet);
+
+                    do {
+                        l++;
+                    } while (l < r && nums[l] == nums[l - 1]);
+
+                    do {
+                        r--;
+                    } while (l < r && nums[r] == nums[r + 1]);
+                } else if (sum > remain) {
+                    r--;
                 } else {
-                    lo++;
-                    while (lo < hi && nums[lo] == nums[lo - 1]) {
-                        lo++;
-                    }
+                    l++;
                 }
             }
 
