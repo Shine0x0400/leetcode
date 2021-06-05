@@ -1,6 +1,9 @@
 package com.zjl.leetcode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author zjl
@@ -92,5 +95,43 @@ public class Leet207_CourseSchedule {
 
         visit[i] = 1;
         return false;
+    }
+
+    // 面向过程方法：从依赖项为0的课程逐个学习，看最终能不能学完全部课程
+    public boolean canFinish2(int numCourses, int[][] prerequisites) {
+        if (numCourses == 1) {
+            return true;
+        }
+
+        int[] preReqCnt = new int[numCourses];
+        HashMap<Integer, List<Integer>> successors = new HashMap<>();
+        for (int i = 0; i < numCourses; i++) {
+            successors.put(i, new ArrayList<Integer>());
+        }
+
+        for (int[] prerequisite : prerequisites) {
+            preReqCnt[prerequisite[0]]++;
+            successors.get(prerequisite[1]).add(prerequisite[0]);
+        }
+
+        for (int i = 0; i < numCourses; i++) {
+            int j;
+            for (j = 0; j < numCourses; j++) {
+                if (preReqCnt[j] == 0) {
+                    preReqCnt[j] = -1;
+                    break;
+                }
+            }
+
+            if (j == numCourses) {
+                return false;
+            }
+
+            for (Integer js : successors.get(j)) {
+                preReqCnt[js]--;
+            }
+        }
+
+        return true;
     }
 }
