@@ -39,6 +39,20 @@ public class Leet152_MaximumProductSubarray {
         return max;
     }
 
+//    // 动态规划
+//    fun maxProduct(nums: IntArray): Int {
+//        var m = Int.MIN_VALUE
+//        for (i in nums.indices) {
+//            m = kotlin.math.max(m, nums[i])
+//            for (j in i + 1 until nums.size) {
+//                nums[i] *= nums[j]
+//                m = kotlin.math.max(m, nums[i])
+//            }
+//        }
+//
+//        return m
+//    }
+
 //    // brute force
 //    public int maxProduct(int[] nums) {
 //        if (nums.length == 0) {
